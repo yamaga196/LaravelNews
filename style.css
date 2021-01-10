@@ -1,0 +1,87 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+h1,h2,h3,h4,h5,h6,p{
+  margin: 0;
+  padding: 0;
+}
+
+/*============================
+body
+=============================*/
+.body{
+  width: 80%;
+  margin: auto;
+}
+
+/*===============================
+header
+================================*/
+.header{
+  margin-top: 5px;
+  background-color: #98fb98;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  font-size: 2rem;
+  padding-left: 1rem;
+}
+
+/*=================================
+h1
+==================================*/
+.h1{
+  font-size: 1.5rem;
+}
+
+/*=================================
+input-matome
+==================================*/
+.input-matome{
+  width: 50%;
+  margin-top: 1.5rem;
+}
+.input-matome .input-main{
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.input-matome .input-main p{
+  width: 20%;
+  float: left;
+  box-sizing: border-box;
+  text-align: center;
+}
+.input-matome .input-main input{
+  width: 80%;
+  height: 30px;
+  box-sizing: border-box;
+}
+.input-matome .input-main textarea{
+  width: 80%;
+  box-sizing: border-box;
+  height: 200px;
+}
+.input-matome .input-main .margin-frist, .margin-second{
+  margin-bottom: 1rem;
+}
+.input-matome .input-main .margin-frist{
+  height: 30px;
+  line-height: 30px;
+}
+.input-matome .input-main .margin-second{
+  height: 200px;
+}
+.input-matome input[type="submit"]{
+  float: right;
+  width: 15%;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 30%;
+  background-color: #98fb98;
+  border: none;
+  font-size: 1.5rem;
+}
+.input-matome input[type="submit"]:hover{
+  cursor: pointer;
+}
