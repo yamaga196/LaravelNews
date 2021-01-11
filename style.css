@@ -13,6 +13,7 @@ body
 .body{
   width: 80%;
   margin: auto;
+  height: auto;
 }
 
 /*===============================
@@ -40,6 +41,8 @@ input-matome
 .input-matome{
   width: 50%;
   margin-top: 1.5rem;
+  height: 300px;
+  margin-bottom: 1.5rem;
 }
 .input-matome .input-main{
   width: 100%;
@@ -84,4 +87,12 @@ input-matome
 }
 .input-matome input[type="submit"]:hover{
   cursor: pointer;
+}
+
+/*=================================
+border
+==================================*/
+.comment-matome .comment-text .border{
+  border: solid 1px #dcdcdc;
+  width: 100%;
 }
