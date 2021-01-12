@@ -29,8 +29,6 @@ if(!empty($_POST)){
   $split_data = '';
   $message = array();
   $message_array = array();
-  $_SESSION['title'] = $_POST['title'];
-  $_SESSION['text'] = $_POST['text'];
   
   if(empty($err_msg)){
 
