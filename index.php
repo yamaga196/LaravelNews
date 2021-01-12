@@ -3,19 +3,25 @@
 //共通関数
 require('function.php');
 
+session_start();
+
+//メッセージを保存するファイルのパス設定
+define('FILENAME', './message.txt');
+
 //post送信されていた場合
 if(!empty($_POST)){
 
   //変数に情報を代入
-  $title = $_POST['title'];
-  $text = $_POST['text'];
+  $_SESSION['title'] = $_POST['title'];
+  $_SESSION['text'] = $_POST['text'];
+  $title = $_SESSION['title'];
+  $text = $_SESSION['text'];
 
   //バリデーション関数(未入力チェック)
   validRequiredtitle($title, 'title');
   validRequiredtext($text, 'text');
-  
-  //メッセージを保存するファイルのパス設定
-  define('FILENAME', './message.txt');
+  //バリデーション関数(３０文字以下)
+  validMaxsan($title, 'title');
   
   //変数
   $data = '';
@@ -23,24 +29,37 @@ if(!empty($_POST)){
   $split_data = '';
   $message = array();
   $message_array = array();
+  $_SESSION['title'] = $_POST['title'];
+  $_SESSION['text'] = $_POST['text'];
   
-  if(!empty($_POST['title']) && !empty($_POST['text'])){
-    //$file_handleにfopen(FILENAME, "a")を入れる
-    //fopen(ファイルを開く)
-    //"a"は書き出し用で開く
-    if($file_handle = fopen(FILENAME, "a")){
-      
-      //書き込みデータを作成
-      $data = "'".$_POST['title']."','".$_POST['text']."'"."\n";
-      
-      //fwriteで書き込み
-      fwrite($file_handle, $data);
-      
-      //fcloseでファイルを閉じる
-      fclose($file_handle);
-    }
+  if(empty($err_msg)){
+
+  //$file_handleにfopen(FILENAME, "a")を入れる
+  //fopen(ファイルを開く)
+  //"a"は書き出し用で開く
+  if($file_handle = fopen(FILENAME, "a")){
+    
+    //書き込みデータを作成
+    $data = "'".$_SESSION['title']."','".$_SESSION['text']."'"."\n";
+    
+    //fwriteで書き込み
+    fwrite($file_handle, $data);
+    
+    //fcloseでファイルを閉じる
+    fclose($file_handle);
   }
-  
+}
+}
+
+if(isset($_POST)){
+
+//変数
+$data = '';
+$file_handle = '';
+$split_data = '';
+$message = array();
+$message_array = array();
+
   //$file_handleにfopen(FILENAME, "r")を入れる
   //fopen(ファイルを開く)
   //"r"は読み込み
@@ -65,7 +84,7 @@ if(!empty($_POST)){
     fclose($file_handle);
   }
 }
-  
+
   ?>
 
 <!DOCTYPE html>
@@ -75,6 +94,7 @@ if(!empty($_POST)){
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="style.css">
   <title>Laravel-News</title>
+  <script src="script.js"></script>
 </head>
 <body class="body">
 
@@ -93,7 +113,7 @@ if(!empty($_POST)){
 
   <!-- 要素 を入れる-->
   <div class="input-matome">
-    <form method="post">
+    <form method="post" onsubmit="return submitChk()">
       <div class="input-main">
         <div class="margin-frist">
           <p>タイトル：</p><input type="text" name="title">
@@ -106,34 +126,33 @@ if(!empty($_POST)){
     </form>
     </div>
     
-    <!-- 要素を取り入れる -->
-    <div class="comment-matome">
-      
-      <!-- $message_arrayが空じゃなければ -->
-      <?php if(!empty($message_array)){ ?>
+    <form method="POST">
+      <!-- 要素を取り入れる -->
+      <div class="comment-matome">
         
-        <!-- foreachは、配列＋繰り返し文をしたようなもの -->
-        <!-- 一次元配列 -->
-        <!-- ($message_array as $value)で$message_arrayの中に入っている要素を$valueに代入する -->
-        <?php foreach($message_array as $value){ ?>
-          
-          <div class="comment-text">
-            <p class="border"></p>
+        <!-- $message_arrayが空じゃなければ -->
+          <?php if(isset($message_array)){ ?>
+          <!-- foreachは、配列＋繰り返し文をしたようなもの -->
+          <!-- 一次元配列 -->
+          <!-- ($message_array as $value)で$message_arrayの中に入っている要素を$valueに代入する -->
+          <?php foreach($message_array as $value){ ?>
             
-            <!-- 96行目で$valueに要素を入れているので、$valueの中にある['title']を呼び出す -->
-            <h2><?php echo $value['title']; ?></h2>
-            
-            <!-- 96行目で$valueに要素を入れているので、$valueの中にある['text']を呼び出す -->
-            <p><?php echo $value['text']; ?></p>
-            
-            <!-- comment.phpに飛ぶ -->
-            <a href="comment.php">記事全文・コメントを見る</a>
-            
+            <div class="comment-text">
+              <p class="border"></p>
+              
+              <!-- 117行目で$valueに要素を入れているので、$valueの中にある['title']を呼び出す -->
+              <h2><?php echo $value['title']; ?></h2>
+              
+              <!-- 117行目で$valueに要素を入れているので、$valueの中にある['text']を呼び出す -->
+              <p class="text"><?php echo $value['text']; ?></p>
+              
+              <a href="comment.php">記事全文・コメントを見る</a>
+            </div>
+            <?php } ?>
+          <?php } ?>
           </div>
-          <?php } ?>
-          <?php } ?>
-        </div>
-        
-
-</body>
+        </form>
+          
+          
+  </body>
 </html>

@@ -92,7 +92,24 @@ input-matome
 /*=================================
 border
 ==================================*/
-.comment-matome .comment-text .border{
+.border{
   border: solid 1px #dcdcdc;
   width: 100%;
+}
+
+/*=====================================
+１行に収める
+======================================*/
+.comment-matome .text{
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/*=====================================
+margin-top
+=======================================*/
+.margin-top{
+  margin-top: 1rem;
 }

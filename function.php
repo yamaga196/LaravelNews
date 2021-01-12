@@ -1,7 +1,7 @@
 <?php
 
-ini_set('log_errors','on'); //ログを取るか
-ini_set('error_log','php.log'); //ログの出力ファイルを指定
+error_reporting(E_ALL); //E_STRICTレベル以外のエラーを報告する
+ini_set('display_errors','on'); //画面にエラーを表示させるか
 
 //============================
 //定数
@@ -33,15 +33,15 @@ function validRequiredtext($str, $key){
 
 
 //バリデーション関数(30文字以下)
-function validMax30($str, $key, $max = 30){
+function validMaxsan($str, $key, $max = 30){
   if(mb_strlen($str) > $max){
     global $err_msg;
-    $err_msg[$key] = MSG02;
+    $err_msg[$key] = MSG03;
   }
 }
 
 //バリデーション関数(50文字以下)
-function validMax50($str, $key, $max = 50){
+function validMaxgo($str, $key, $max = 50){
   if(mb_strlen($str) > $max){
     global $err_msg;
     $err_msg[$key] = MSG03;
