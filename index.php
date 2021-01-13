@@ -67,6 +67,7 @@ if(isset($_POST)){
       
       //$messageにarray配列を入れる
       $message = array(
+        'num' => $split_data[0],
         'title' => $split_data[1],
         'text' => $split_data[3],
       );
@@ -81,15 +82,11 @@ if(isset($_POST)){
 
   ?>
 
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <title>Laravel-News</title>
-  <script src="script.js"></script>
-</head>
+<!-- ヘッド -->
+<?php
+require('head.php');
+?>
+
 <body class="body">
 
   <!--　ヘッダー　-->
@@ -120,7 +117,7 @@ if(isset($_POST)){
     </form>
     </div>
     
-    <form method="POST">
+    <form action="comment.php" method="POST">
       <!-- 要素を取り入れる -->
       <div class="comment-matome">
         
@@ -140,7 +137,7 @@ if(isset($_POST)){
               <!-- 117行目で$valueに要素を入れているので、$valueの中にある['text']を呼び出す -->
               <p class="text"><?php echo $value['text']; ?></p>
               
-              <a href="comment.php">記事全文・コメントを見る</a>
+              <input type="submit" value="記事全文・コメントを見る">
             </div>
             <?php } ?>
           <?php } ?>

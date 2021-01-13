@@ -2,22 +2,44 @@
 session_start();
 ?>
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laravel-News</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
-</head>
+<!-- ヘッド -->
+<?php
+ require('head.php');
+?>
+
 <body class="body">
   
+<!-- ヘッダー -->
   <?php
   require('header.php');
   ?>
 
 <div class="margin-top"></div>
 <?php
+//メッセージを保存するファイルのパス設定
+define('FILENAME', './text.txt');
+
+$num = count(file(FILENAME));
+    $num++;
+
+//$file_handleにfopen(FILENAME, "r")を入れる
+  //fopen(ファイルを開く)
+  //"r"は読み込み
+  if($file_handle = fopen(FILENAME,"r")){
+    
+    //whileは条件式がtrueだった場合に、処理を実行
+    //fgets指定したファイルから内容を1行読み込む関数
+    while($data = fgets($file_handle)){
+     if($num === $num){
+       echo $_SESSION['title'];
+       echo $_SESSION['text'];
+     }
+
+    }
+    
+    //ファイルを閉じる
+    fclose($file_handle);
+  }
 
  ?><br>
 <div class="margin-top"></div>
