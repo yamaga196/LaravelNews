@@ -6,7 +6,14 @@ require('function.php');
 session_start();
 
 //メッセージを保存するファイルのパス設定
-define('FILENAME', './message.txt');
+define('FILENAME', './text.txt');
+
+//変数
+$data = '';
+$file_handle = '';
+$split_data = '';
+$message = array();
+$message_array = array();
 
 //post送信されていた場合
 if(!empty($_POST)){
@@ -23,13 +30,6 @@ if(!empty($_POST)){
   //バリデーション関数(３０文字以下)
   validMaxsan($title, 'title');
   
-  //変数
-  $data = '';
-  $file_handle = '';
-  $split_data = '';
-  $message = array();
-  $message_array = array();
-  
   if(empty($err_msg)){
 
   //$file_handleにfopen(FILENAME, "a")を入れる
@@ -37,8 +37,11 @@ if(!empty($_POST)){
   //"a"は書き出し用で開く
   if($file_handle = fopen(FILENAME, "a")){
     
+    $num = count(file(FILENAME));
+    $num++;
+
     //書き込みデータを作成
-    $data = "'".$_SESSION['title']."','".$_SESSION['text']."'"."\n";
+    $data = $num."'".$_SESSION['title']."','".$_SESSION['text']."'"."\n";
     
     //fwriteで書き込み
     fwrite($file_handle, $data);
@@ -50,13 +53,6 @@ if(!empty($_POST)){
 }
 
 if(isset($_POST)){
-
-//変数
-$data = '';
-$file_handle = '';
-$split_data = '';
-$message = array();
-$message_array = array();
 
   //$file_handleにfopen(FILENAME, "r")を入れる
   //fopen(ファイルを開く)
@@ -129,7 +125,7 @@ $message_array = array();
       <div class="comment-matome">
         
         <!-- $message_arrayが空じゃなければ -->
-          <?php if(isset($message_array)){ ?>
+          <?php if(!empty($message_array)){ ?>
           <!-- foreachは、配列＋繰り返し文をしたようなもの -->
           <!-- 一次元配列 -->
           <!-- ($message_array as $value)で$message_arrayの中に入っている要素を$valueに代入する -->

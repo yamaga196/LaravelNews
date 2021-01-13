@@ -18,15 +18,7 @@ session_start();
 
 <div class="margin-top"></div>
 <?php
-  $fp = fopen("message.txt", "r");
-  while(!feof($fp)){
-    $buffer = fgets($fp, 4096);
-    if(strstr($buffer, $_SESSION['title'])){
-      $aaa = $buffer;
-      break;
-    }
-  }
-  fclose($fp);
+
  ?><br>
 <div class="margin-top"></div>
 
