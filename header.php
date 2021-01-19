@@ -1,4 +1,3 @@
 <div class="header">
-    <header>Laravel News</header>
+    <header><a href="index.php">Laravel News</a></header>
 </div>
-
