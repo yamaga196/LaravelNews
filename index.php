@@ -6,7 +6,7 @@ require('function.php');
 session_start();
 
 //メッセージを保存するファイルのパス設定
-define('FILENAME', './text.txt');
+define('FILENAME', './text.csv');
 
 //変数
 $data = '';
@@ -14,6 +14,7 @@ $file_handle = '';
 $split_data = '';
 $message = array();
 $message_array = array();
+$count = (count(file(FILENAME))+1);
 
 //post送信されていた場合
 if(!empty($_POST)){
@@ -26,7 +27,7 @@ if(!empty($_POST)){
 
   //バリデーション関数(未入力チェック)
   validRequiredtitle($title, 'title');
-  validRequiredtext($text, 'text');
+  validRequiredkizi($text, 'text');
   //バリデーション関数(３０文字以下)
   validMaxsan($title, 'title');
   
@@ -36,12 +37,9 @@ if(!empty($_POST)){
   //fopen(ファイルを開く)
   //"a"は書き出し用で開く
   if($file_handle = fopen(FILENAME, "a")){
-    
-    $num = count(file(FILENAME));
-    $num++;
 
     //書き込みデータを作成
-    $data = $num."'".$_SESSION['title']."','".$_SESSION['text']."'"."\n";
+    $data = $count."'".$_SESSION['title']."','".$_SESSION['text']."'"."\n";
     
     //fwriteで書き込み
     fwrite($file_handle, $data);
@@ -79,7 +77,6 @@ if(isset($_POST)){
     fclose($file_handle);
   }
 }
-
   ?>
 
 <!-- ヘッド -->
@@ -97,6 +94,7 @@ require('head.php');
   <!--　h１　-->
   <h1 class="h1">さぁ、最新のニュースをシェアしましょう</h1>
 
+  <!-- エラーメッセージ -->
   <?php if(!empty($_POST)){ ?>
     <?php if(!empty($err_msg['title'])) echo $err_msg['title']; ?><br>
     <?php if(!empty($err_msg['text'])) echo $err_msg['text']; ?>
@@ -117,7 +115,7 @@ require('head.php');
     </form>
     </div>
     
-    <form action="comment.php" method="POST">
+    <form method="get">
       <!-- 要素を取り入れる -->
       <div class="comment-matome">
         
@@ -130,20 +128,28 @@ require('head.php');
             
             <div class="comment-text">
               <p class="border"></p>
+
+              <?php
+                $_SESSION['title'] = $value['title'];
+                $_SESSION['text'] = $value['text'];
+                $_SESSION['num'] = $value['num'];
+                $title = $_SESSION['title'];
+                $text = $_SESSION['text'];
+                $num = $_SESSION['num'];
+              ?>
               
               <!-- 117行目で$valueに要素を入れているので、$valueの中にある['title']を呼び出す -->
-              <h2><?php echo $value['title']; ?></h2>
+              <h2><?php echo $title; ?></h2>
               
               <!-- 117行目で$valueに要素を入れているので、$valueの中にある['text']を呼び出す -->
-              <p class="text"><?php echo $value['text']; ?></p>
-              
-              <input type="submit" value="記事全文・コメントを見る">
+              <p class="text"><?php echo $text; ?></p>
+          
+              <a href="comment.php?title=<?php echo $title; ?>&text=<?php echo $text; ?>&num=<?php echo $num; ?>">記事全文・コメントを見る</a>
             </div>
             <?php } ?>
           <?php } ?>
           </div>
         </form>
-          
           
   </body>
 </html>

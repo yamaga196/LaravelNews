@@ -113,3 +113,37 @@ margin-top
 .margin-top{
   margin-top: 1rem;
 }
+
+/*=======================================
+comment-form
+========================================*/
+.comment-form{
+  width: 100%;
+}
+.comment-form .text{
+  width: 150px;
+  height: 150px;
+  position: relative;
+}
+.comment-form textarea{
+  width: 150px;
+  height: 150px;
+  box-sizing: border-box;
+}
+.comment-form input{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.comment-a{
+  margin-top: 1.5rem;
+  clear: both;
+}
+.comment-color{
+  width: 150px;
+  height: 150px;
+  background-color: #98fb98;
+  float: left;
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
