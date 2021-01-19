@@ -11,13 +11,6 @@
   ?>
 
 <div class="margin-top"></div>
-<?php
-
-//共通関数
-require('function.php');
-
-session_start();
-?>
 
 <h1><?php echo $_GET['title']; ?></h1>
 <p><?php echo $_GET['text']; ?></p>
@@ -29,8 +22,13 @@ session_start();
 
 <?php
 
+  //共通関数
+  require('function.php');
+
+  session_start();
+
   //メッセージを保存するファイルのパス設定
-  define('FILENAME', './comment.csv');
+  define('FILENAME', './come.csv');
 
   //変数
   $data = '';
@@ -38,6 +36,7 @@ session_start();
   $split_data = '';
   $message = array();
   $message_array = array();
+  $count = (count(file(FILENAME))+1);
 
   if(!empty($_POST)){
 
@@ -59,7 +58,7 @@ session_start();
       if($file_handle = fopen(FILENAME, "a")){
         
         //書き込みデータを作成
-        $data = $num."'".$_SESSION['comment']."'"."\n";
+        $data = $num."'".$_SESSION['comment']."'".$count."'"."\n";
 
         //fwriteで書き込み
         fwrite($file_handle, $data);
