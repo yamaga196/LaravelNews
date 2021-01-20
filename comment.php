@@ -12,6 +12,7 @@
 
 <div class="margin-top"></div>
 
+<!-- タイトルと記事を表示 -->
 <h1><?php echo $_GET['title']; ?></h1>
 <p><?php echo $_GET['text']; ?></p>
 
@@ -41,10 +42,8 @@
   if(!empty($_POST)){
 
     //変数に情報を代入
-    $_SESSION['comment'] = $_POST['comment'];
-    $comment = $_SESSION['comment'];
-    $_SESSION['num'] = $_GET['num'];
-    $num = $_SESSION['num'];
+    $comment = $_POST['comment'];
+    $num = $_GET['num'];
 
     //バリデーションチェック
       validRequiredcomment($comment, 'comment');

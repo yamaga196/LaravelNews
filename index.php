@@ -20,10 +20,8 @@ $count = (count(file(FILENAME))+1);
 if(!empty($_POST)){
 
   //変数に情報を代入
-  $_SESSION['title'] = $_POST['title'];
-  $_SESSION['text'] = $_POST['text'];
-  $title = $_SESSION['title'];
-  $text = $_SESSION['text'];
+  $title = $_POST['title'];
+  $text = $_POST['text'];
 
   //バリデーション関数(未入力チェック)
   validRequiredtitle($title, 'title');
@@ -130,12 +128,9 @@ require('head.php');
               <p class="border"></p>
 
               <?php
-                $_SESSION['title'] = $value['title'];
-                $_SESSION['text'] = $value['text'];
-                $_SESSION['num'] = $value['num'];
-                $title = $_SESSION['title'];
-                $text = $_SESSION['text'];
-                $num = $_SESSION['num'];
+                $titie = $value['title'];
+                $text = $value['text'];
+                $num = $value['num'];
               ?>
               
               <!-- 117行目で$valueに要素を入れているので、$valueの中にある['title']を呼び出す -->
