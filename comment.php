@@ -42,8 +42,10 @@
   if(!empty($_POST)){
 
     //変数に情報を代入
-    $comment = $_POST['comment'];
-    $num = $_GET['num'];
+    $_SESSION['comment'] = $_POST['comment'];
+    $_SESSION['num'] = $_GET['num'];
+    $comment = $_SESSION['comment'];
+    $num = $_SESSION['num'];
 
     //バリデーションチェック
       validRequiredcomment($comment, 'comment');
