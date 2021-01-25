@@ -146,4 +146,10 @@ comment-form
   float: left;
   margin-top: 1rem;
   margin-right: 1rem;
+  position: relative;
+}
+.comment-delete input[type="submit"]{
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
