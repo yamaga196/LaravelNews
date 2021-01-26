@@ -18,7 +18,7 @@ if(!empty($_POST)){
   validMaxsan($title, 'title');
 
   //==========================
-  //投稿のデータベース
+  //投稿のデータ
   //==========================
   if(empty($err_msg)){
 
@@ -42,7 +42,7 @@ if(!empty($_POST)){
 }
 
 //=================================
-//投稿のデータベースを検索
+//投稿のデータを検索
 //=================================
   if(isset($_POST)){
 
@@ -52,7 +52,7 @@ if(!empty($_POST)){
       //SQL文作成
       $sql = 'SELECT * FROM kizi ORDER BY id DESC';
 
-      $stmt = $dbh->query($sql);
+      $stmtkizi = $dbh->query($sql);
 
     }catch(Exception $e){
       $err_msg['title'] = valid_title;
@@ -102,8 +102,8 @@ if(!empty($_POST)){
     <form action="">
 
     <div class="comment-matome">
-      <?php if(!empty($stmt)): ?>
-        <?php foreach($stmt as $row): ?>
+      <?php if(!empty($stmtkizi)): ?>
+        <?php foreach($stmtkizi as $row): ?>
           
           <div class="comment-text">
             <p class="border"></p>

@@ -7,11 +7,11 @@ ini_set('display_errors','on'); //画面にエラーを表示させるか
 //定数
 //============================
 //エラーメッセージを定数に設定
-define('valid_title','タイトルは入力必須です');
-define('valid_kizi','記事は入力必須です');
-define('valid_comment','コメントは入力必須です');
-define('valid_title_30','タイトルは30文字以下です');
-define('valid_comment_50','コメントは50文字以下です');
+define('VALID_TITLE','タイトルは入力必須です');
+define('VALID_KIZI','記事は入力必須です');
+define('VALID_COMMENT','コメントは入力必須です');
+define('VALID_TITLE_30','タイトルは30文字以下です');
+define('VALID_COMMENT_50','コメントは50文字以下です');
 
 //エラーメッセージ格納用の配列
 $err_msg = array();
@@ -24,7 +24,7 @@ $err_msg = array();
 function validRequiredtitle($str, $key){
   if(empty($str)){
     global $err_msg;
-    $err_msg[$key] = valid_title;
+    $err_msg[$key] = VALID_TITLE;
   }
 }
 
@@ -32,7 +32,7 @@ function validRequiredtitle($str, $key){
 function validRequiredtext($str, $key){
   if(empty($str)){
     global $err_msg;
-    $err_msg[$key] = valid_kizi;
+    $err_msg[$key] = VALID_KIZI;
   }
 }
 
@@ -40,7 +40,7 @@ function validRequiredtext($str, $key){
 function validRequiredcomment($str, $key){
   if(empty($str)){
     global $err_msg;
-    $err_msg[$key] = valid_comment;
+    $err_msg[$key] = VALID_COMMENT;
   }
 }
 
@@ -49,7 +49,7 @@ function validRequiredcomment($str, $key){
 function validMaxsan($str, $key, $max = 30){
   if(mb_strlen($str) > $max){
     global $err_msg;
-    $err_msg[$key] = valid_title_30;
+    $err_msg[$key] = VALID_TITLE_30;
   }
 }
 
@@ -57,7 +57,7 @@ function validMaxsan($str, $key, $max = 30){
 function validMaxgo($str, $key, $max = 50){
   if(mb_strlen($str) > $max){
     global $err_msg;
-    $err_msg[$key] = valid_comment_50;
+    $err_msg[$key] = VALID_COMMENT_50;
   }
 }
 

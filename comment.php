@@ -17,7 +17,7 @@ if(!empty($_POST)){
   validMaxgo($comment, 'comment');
 
 //===============================
-// コメントのデータベースの挿入
+// コメントのデータを挿入
 //===============================
   if(empty($err_msg)){
 
@@ -40,19 +40,19 @@ if(!empty($_POST)){
 }
 
 //=============================
-//コメントのデータベースを削除
+//コメントのデータを削除
 //=============================
 if(isset($_POST['del'])){
 
   //変数にユーザー情報を代入
-  $del = $_POST['del'];
+  $comment_id = $_POST['del'];
   //削除ボタンが押された場合
   try{
     //DBへ接続
     $dbh = dbConnect();
     //SQL文作成
     $sql = 'DELETE FROM comments WHERE id = :del';
-    $data = array(':del' => $del);
+    $data = array(':del' => $comment_id);
     //クエリ実行
     queryPost($dbh, $sql, $data);
 
@@ -63,7 +63,7 @@ if(isset($_POST['del'])){
 }
 
 //==============================
-//コメントのデータベースの検索
+//コメントのデータを検索
 //==============================
   if(isset($_POST)){
 
@@ -71,7 +71,7 @@ if(isset($_POST['del'])){
       //DBへ接続
       $dbh = dbConnect();
       //SQL文作成
-      $sql = 'SELECT * FROM comments';
+      $sql = "SELECT * FROM comments WHERE kizi_id = $id";
 
       $stmtcomment = $dbh->query($sql);
 
@@ -81,7 +81,7 @@ if(isset($_POST['del'])){
   }
 
 //================================
-//記事のデータベースの検索
+//記事のデータを検索
 //================================
 if(isset($_POST)){
 
@@ -89,7 +89,7 @@ if(isset($_POST)){
     //DBへ接続
     $dbh = dbConnect();
     //SQL文作成
-    $sql = 'SELECT * FROM kizi';
+    $sql = "SELECT * FROM kizi WHERE id = $id";
 
     $stmt = $dbh->query($sql);
   }catch(Exception $e){
