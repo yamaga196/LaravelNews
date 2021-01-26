@@ -75,6 +75,9 @@ input-matome
 .input-matome .input-main .margin-second{
   height: 200px;
 }
+.input-matome .input-main input[name="user"]{
+  width: 30%;
+}
 .input-matome input[type="submit"]{
   float: right;
   width: 15%;

@@ -9,7 +9,9 @@ ini_set('display_errors','on'); //画面にエラーを表示させるか
 //エラーメッセージを定数に設定
 define('VALID_TITLE','タイトルは入力必須です');
 define('VALID_KIZI','記事は入力必須です');
+define('VALID_NAME','名前は入力必須です');
 define('VALID_COMMENT','コメントは入力必須です');
+define('VALID_NAME_10','名前は10文字以下です');
 define('VALID_TITLE_30','タイトルは30文字以下です');
 define('VALID_COMMENT_50','コメントは50文字以下です');
 
@@ -28,7 +30,7 @@ function validRequiredtitle($str, $key){
   }
 }
 
-//バリデーション関数(未入力チェック(text))
+//バリデーション関数(未入力チェック(kizi))
 function validRequiredtext($str, $key){
   if(empty($str)){
     global $err_msg;
@@ -36,7 +38,7 @@ function validRequiredtext($str, $key){
   }
 }
 
-//バリデーション関数(未入力チェック(text))
+//バリデーション関数(未入力チェック(comment))
 function validRequiredcomment($str, $key){
   if(empty($str)){
     global $err_msg;
@@ -44,6 +46,21 @@ function validRequiredcomment($str, $key){
   }
 }
 
+//バリデーション関数(未入力チェック(name))
+function validRequiredname($str, $key){
+  if(empty($str)){
+    global $err_msg;
+    $err_msg[$key] = VALID_NAME;
+  }
+}
+
+//バリデーション関数(10文字以下)
+function validnameten($str, $key, $max = 10){
+  if(mb_strlen($str) > $max){
+    global $err_msg;
+    $err_msg[$key] = VALID_NAME_10;
+  }
+}
 
 //バリデーション関数(30文字以下)
 function validMaxsan($str, $key, $max = 30){

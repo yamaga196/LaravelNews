@@ -121,6 +121,7 @@ if(isset($_POST)){
       <?php if(rtrim($row['id'] === $id)): ?>
         <h2><?php echo $row['title']; ?></h2>
         <p class="text"><?php echo $row['text']; ?></p>
+        <h5>投稿者：<?php echo $row['user']; ?></h5>
       <?php endif; ?>
     <?php endforeach; ?>
   <?php endif; ?>
